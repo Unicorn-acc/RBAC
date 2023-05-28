@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rbac.mapper.EmpMapper">
+
+    <select id = "empPage" resultType="emp">
+        select *
+        from emp
+        <where>
+            <if test="param.empName != null and param.empName != ''">
+                emp_name like concat("%", #{param.empName}, "%")
+            </if>
+            <if test="param.deptNo != null and param.deptNo != 0">
+                and dept_no = #{param.deptNo}
+            </if>
+            <if test="param.job != null and param.job != ''">
+                and job like concat("%", #{param.job}, "%")
+            </if>
+            <if test="param.phone != null and param.phone != ''">
+                and phone like concat("%", #{param.phone}, "%")
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+</mapper>

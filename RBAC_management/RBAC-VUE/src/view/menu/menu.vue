@@ -208,27 +208,29 @@ export default {
                     data: this.menuForm
                 }).then(({ data }) => {
                     // console.log(data)
-                    var msg = "";
-                    if(operation == "update"){
-                        msg = "修改";
-                    }else{
-                        msg = "添加";
+                    if(data.code == 200){
+                        var msg = "";
+                        if(operation == "update"){
+                            msg = "修改";
+                        }else{
+                            msg = "添加";
+                        }
+                        this.$message({
+                                message: msg + "菜单成功",
+                                type: "success",
+                        });
+                        this.menuForm =  {
+                            type: 1,
+                            urlName: "name",
+                            url: "url",
+                            status: 1,
+                            orderNum: 1,
+                            pid: "default",
+                            pidName: ""
+                        },
+                        this.menudialogVisible = false,
+                        this.getMenuList();
                     }
-                    this.$message({
-                            message: msg + "菜单成功",
-                            type: "success",
-                    });
-                    this.menuForm =  {
-                        type: 1,
-                        urlName: "name",
-                        url: "url",
-                        status: 1,
-                        orderNum: 1,
-                        pid: "default",
-                        pidName: ""
-                    },
-                    this.menudialogVisible = false,
-                    this.getMenuList();
                 });
         },
     },
